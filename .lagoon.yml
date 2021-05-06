@@ -1,6 +1,5 @@
 docker-compose-yaml: docker-compose.yml
-
-project: drupal9-example-simple
+project: drupal-example-polysite
 
 tasks:
 #   pre-rollout:
@@ -15,19 +14,19 @@ tasks:
     #     name: drush cim
     #     command: drush -y cim
     #     service: cli
-    - run:
-        name: drush updb
-        command: drush -y updb
-        service: cli
-    - run:
-        name: drush cr
-        command: drush -y cr
-        service: cli
+    #- run:
+    #    name: drush updb
+    #    command: drush -y updb
+    #    service: cli
+    #- run:
+    #    name: drush cr
+    #    command: drush -y cr
+    #    service: cli
 
 
 
 environments:
-  9.x:
+  main:
     # routes:
     cronjobs:
       - name: drush cron

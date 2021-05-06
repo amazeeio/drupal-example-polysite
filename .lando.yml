@@ -1,4 +1,4 @@
-name: drupal9-example-simple
+name: drupal-example-polysite
 recipe: lagoon
 config:
   flavor: drupal
