@@ -9,12 +9,23 @@ tasks:
 #         service: cli
 
   post-rollout:
-    # Enable once config sync has been setup.
-    # - run:
-    #     name: drush cim
-    #     command: drush -y cim
-    #     service: cli
     - run:
+        name: IF no Drupal installed and we are not main branch, sync from main branch
+        command: |
+            if tables=$(drush sqlq 'show tables;') && [ -z "$tables" ] && [[ "$LAGOON_GIT_BRANCH" != "main" ]]; then
+                # no drupal installed, sync DB from main branch
+                drush -y sql-sync @lagoon.drupal-example-polysite-main @self
+                drush -y rsync @lagoon.drupal-example-polysite-main:%files @self:%files
+                drush -y cr
+            fi
+        service: cli
+        shell: bash
+    # Enable once config sync has been setup.
+    - run:
+        name: drush cim
+        command: drush -y cim
+        service: cli
+    - run:  
         name: drush updb
         command: drush -y updb
         service: cli
