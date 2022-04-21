@@ -23,13 +23,17 @@ tasks:
         command: drush -y cr
         service: cli
 
+# # this configures two projects for the polysite, called project1 and project2
+# project1:
+#   environments:
+#     main:
+#       routes:
+#         - nginx:
+#           - project1-example.com
 
-
-environments:
-  main:
-    # routes:
-    cronjobs:
-      - name: drush cron
-        schedule: "*/15 * * * *"
-        command: drush cron
-        service: cli
+# project2:
+#   environments:
+#     main:
+#       routes:
+#         - nginx:
+#           - project2-example.com
